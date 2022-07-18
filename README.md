@@ -1,5 +1,5 @@
-# aoc
-Collection of my Advent of Code repositories
+# Advent of Code
+Collection of my Advent of Code (AOC) repositories
 
 [![2015](https://github-readme-stats.vercel.app/api/pin/?theme=react&username=RussellDash332&repo=aoc-2015)](https://github.com/RussellDash332/aoc-2015)
 [![2016](https://github-readme-stats.vercel.app/api/pin/?theme=react&username=RussellDash332&repo=aoc-2016)](https://github.com/RussellDash332/aoc-2016)
