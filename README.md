@@ -8,6 +8,4 @@ Collection of my Advent of Code (AOC) repositories. Tap on the cards to redirect
 [![2019](https://github-readme-stats.vercel.app/api/pin/?theme=chartreuse-dark&username=RussellDash332&repo=aoc-2019)](https://github.com/RussellDash332/aoc-2019)
 [![2020](https://github-readme-stats.vercel.app/api/pin/?theme=gotham&username=RussellDash332&repo=aoc-2020)](https://github.com/RussellDash332/aoc-2020)
 [![2021](https://github-readme-stats.vercel.app/api/pin/?theme=monokai&username=RussellDash332&repo=aoc-2021)](https://github.com/RussellDash332/aoc-2021)
-<!--
 [![2022](https://github-readme-stats.vercel.app/api/pin/?theme=react&username=RussellDash332&repo=aoc-2022)](https://github.com/RussellDash332/aoc-2022)
--->
