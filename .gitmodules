@@ -1,0 +1,24 @@
+[submodule "aoc-2015"]
+	path = aoc-2015
+	url = git@github.com:RussellDash332/aoc-2015.git
+[submodule "aoc-2016"]
+	path = aoc-2016
+	url = git@github.com:RussellDash332/aoc-2016.git
+[submodule "aoc-2017"]
+	path = aoc-2017
+	url = git@github.com:RussellDash332/aoc-2017.git
+[submodule "aoc-2018"]
+	path = aoc-2018
+	url = git@github.com:RussellDash332/aoc-2018.git
+[submodule "aoc-2019"]
+	path = aoc-2019
+	url = git@github.com:RussellDash332/aoc-2019.git
+[submodule "aoc-2020"]
+	path = aoc-2020
+	url = git@github.com:RussellDash332/aoc-2020.git
+[submodule "aoc-2021"]
+	path = aoc-2021
+	url = git@github.com:RussellDash332/aoc-2021.git
+[submodule "aoc-2022"]
+	path = aoc-2022
+	url = git@github.com:RussellDash332/aoc-2022.git
