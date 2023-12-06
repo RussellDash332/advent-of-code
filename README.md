@@ -34,4 +34,7 @@ cd ~/advent-of-code/aoc-$Y/Day-$X/Haskell && runhaskell main.hs && cd ../../..
 
 # Rust
 cd ~/advent-of-code/aoc-$Y/Day-$X/Rust && rustc main.rs && ./main < ../$X.in && cd ../../..
+
+# Ruby
+cd ~/advent-of-code/aoc-$Y/Day-$X/Ruby && ruby main.rb < ../$X.in && cd ../../..
 ```
