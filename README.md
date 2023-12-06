@@ -15,6 +15,8 @@ Collection of my Advent of Code (AOC) repositories. For codes before 2023, tap o
 export X=... # day number, 2 digits
 export Y=... # year
 
+# Note that .in files are hidden but it should be within Day-<X>/<X>.in
+
 # Python
 cd ~/advent-of-code/aoc-$Y/Day-$X/Python && python main.py < ../$X.in && cd ../../..
 
