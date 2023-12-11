@@ -7,13 +7,13 @@ def solve(e):
     for i in range(R):
         for j in range(C):
             if m[i][j] == '#': r.discard(i), c.discard(j), G.append((i, j))
-    p, q = {}, {}; t = u = 0
+    p, q = [], []; t = u = 0
     for i in range(R):
         if i in r: t += e
-        p[i] = i+t
+        p.append(i+t)
     for i in range(C):
         if i in c: u += e
-        q[i] = i+u
+        q.append(i+u)
     return sum(abs(p[a]-p[c])+abs(q[b]-q[d]) for a,b in G for c,d in G)//2
 
 print('Part 1:', solve(1))
