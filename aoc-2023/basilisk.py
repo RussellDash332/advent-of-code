@@ -10,8 +10,8 @@
 [S:=str.split,A:=list.append,I:=__import__('sys').stdin.readline,c:=lambda s:[x:=[],[[u:=[],[[A(x,(max(a+p-q,p),min(b+p-q,p+r-1))),A(u,(max(a,q),min(b,q+r-1)))]for p,q,r in d if(a<q+r)*(b>=q)],0if u else[A(x,(a,b)),A(u,x[-1])],A(x,(a,u[0][0]-1)),u.insert(0,x[-1]),A(x,(u[-1][1]+1,b)),A(u,x[-1]),[A(x,(e[1]+1,f[0]-1))for e,f in zip(u,u[1:])]]for a,b in s],[(a,b)for a,b in x if a<=b]][2],s:=[s:=[*map(lambda x:[int(x)]*2,S(S(I(),':')[1]))],[[t:=s[2*i][0],t+s[2*i+1][0]-1]for i in range(len(s)//2)]],I(),[[I(),d:=[1],[(A(d,[*map(int,S(I()))])if not d or d[-1]else 0)for i in d],d:=d[1:-1],d.sort(key=lambda x:x[1]),s:=[*map(c,s)]]for _ in'.'*7],print('Part 1:',min(s[0])[0],'\nPart 2:',min(s[1])[0])]
 # Day 06: 185
 [f:=1,l:=[input().split()[1:]for _ in'..'],g:=lambda a,b:a-1-2*int((a-(a*a-4*b)**.5)/2),[f:=f*g(*map(int,i))for i in zip(*l)],print('Part 1:',f,'\nPart 2:',g(*map(int,map(''.join,l))))]
-# Day 07: 352
-[m:=dict(zip('TJQKA',':;<=>')),r:=lambda f:[max(f),-len(f)],d:=[*map(str.split,(I:=__import__)('sys').stdin)],s:=lambda t:sum((i+1)*int(e[1])for i,e in enumerate(sorted(d,key=lambda c:max(r(I('collections').Counter(c[0].replace(t,i)).values())for i in c[0])+[m.get(i,i)for i in c[0]]))),print('Part 1:',s('@')),m:={**m,'J':'1'},print('Part 2:',s('J'))]
+# Day 07: 349
+[m:=dict(zip('TJQKA',':;<=>')),d:=[*map(str.split,(I:=__import__)('sys').stdin)],s:=lambda t:sum((i+1)*int(e[1])for i,e in enumerate(sorted(d,key=lambda c:max((lambda f:[max(f),-len(f)])(I('collections').Counter(c[0].replace(t,i)).values())for i in c[0])+[m.get(i,i)for i in c[0]]))),print('Part 1:',s('@')),m:={**m,'J':'1'},print('Part 2:',s('J'))]
 # Day 08: 328
 [I:=__import__,m:=input().strip(),input(),g:=dict(((n:=I('re').findall('\w+',l))[0],n[1:])for l in I('sys').stdin),d:=lambda p,s:[[p:=g[p][i>'L']for i in m],len(m)+(0if'Z'*s==p[3-s:]else d(p,s))][1],print('Part 1:',d('AAA',3),'\nPart 2:',I('functools').reduce(lambda x,y:x*y//I('math').gcd(x,y),[d(i,1)for i in g if'A'==i[2]]))]
 # Day 09: 197
