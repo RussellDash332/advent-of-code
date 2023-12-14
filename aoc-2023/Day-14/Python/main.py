@@ -1,5 +1,4 @@
-import sys
-m = [*map(list, map(str.strip, sys.stdin))]
+m = [*map(list,map(str.strip,__import__('sys').stdin))]
 def roll(m):
     for c in range(len(m[0])):
         for r in range(len(m)):
