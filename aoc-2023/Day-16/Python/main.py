@@ -1,31 +1,20 @@
-import sys; from collections import deque
+import sys
 m = [*map(str.strip, sys.stdin)]; b = []
-for i in range(len(m)): b.extend(((i, 0, 0, 1), (i, len(m[0])-1, 0, -1)))
-for i in range(len(m[0])): b.extend(((0, i, 1, 0), (len(m)-1, i, -1, 0)))
+for i in range(R:=len(m)): b.extend(((i, 0, 0), (i, (C:=len(m[0]))-1, 2)))
+for i in range(C): b.extend(((0, i, 3), (R-1, i, 1)))
+K = ((0, 1), (-1, 0), (0, -1), (1, 0)); m = ''.join(map(''.join, m))
 
 def simulate(t):
-    q = deque([t])
-    e = [[0]*len(i) for i in m]
-    seen = set()
-    while q:
-        r, c, dr, dc = q.popleft()
-        if not (0<=r<len(m) and 0<=c<len(m[0])): continue
-        if (tup:=(r, c, dr, dc)) in seen: continue
-        seen.add(tup)
-        e[r][c] += 1
-        if m[r][c] == '.': q.append((r+dr, c+dc, dr, dc))
-        elif m[r][c] == '|':
-            if dr == 0: q.append((r-1, c, -1, 0)), q.append((r+1, c, 1, 0))
-            else: q.append((r+dr, c+dc, dr, dc))
-        elif m[r][c] == '/':
-            if dr == 0: q.append((r-dc, c, -dc, 0))
-            else: q.append((r, c-dr, 0, -dr))
-        elif m[r][c] == '-':
-            if dc == 0: q.append((r, c-1, 0, -1)), q.append((r, c+1, 0, 1))
-            else: q.append((r+dr, c+dc, dr, dc))
-        else: # \
-            if dr == 0: q.append((r+dc, c, dc, 0))
-            else: q.append((r, c+dr, 0, dr))
-    return sum(map(lambda x: sum(map(bool, x)), e))
-print('Part 1:', simulate((0, 0, 0, 1)))
+    s = [t]; e = [0]*R*C; v = [0]*4*R*C
+    while s:
+        r, c, z = s.pop()
+        if 0<=r<R and 0<=c<C and v[(k:=4*r*C+4*c+z)]==0:
+            v[k] = e[k//4] = 1; x = m[k//4]
+            if x == '|' and z%2==0: s.extend(((r-1, c, 1), (r+1, c, 3)))
+            elif x == '-' and z%2: s.extend(((r, c-1, 2), (r, c+1, 0)))
+            elif x == '\\': dr, dc = K[z^3]; s.append((r+dr, c+dc, z^3))
+            elif x == '/': dr, dc = K[z^1]; s.append((r+dr, c+dc, z^1))
+            else: dr, dc = K[z]; s.append((r+dr, c+dc, z))
+    return sum(e)
+print('Part 1:', simulate((0, 0, 0)))
 print('Part 2:', max(map(simulate, b)))
