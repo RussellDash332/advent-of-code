@@ -2,6 +2,8 @@
 *.pdf
 *.class
 *.in
+*.svg
 main
 mainc
+visualize.py
 __pycache__/
