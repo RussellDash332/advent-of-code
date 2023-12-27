@@ -19,25 +19,31 @@ for u in (i for i in range(R*C) if len(G[i]) == 2):
     G[a][c] = G[c][a] = b+d
 
 # recursive
-sys.setrecursionlimit(3000)
-def bt(g, v, d, p):
-    if v in p: return
-    if v == n-2: ans[0] = max(ans[0], d); return
-    p.add(v)
-    for w in g[v]: bt(g, w, d+g[v][w], p)
-    p.discard(v)
+def bt(g, v, p):
+    for i in range(n): G[i] = tuple(G[i].items())
+    ans = [0]
+    def f(v, d):
+        if v in p: return
+        if v == t:
+            if ans[0] < d: ans[0] = d; return
+        p.add(v)
+        for w, x in g[v]: f(w, d+x)
+        p.discard(v)
+    s, y = [*g[v]][0]; t, z = [*g[n-2]][0] # the input is nice :)
+    f(s, y+z); return ans[0]
 
 # iterative
-def bt_iter(g, v, d, p):
-    s = [(2*v, d)]; T = 2*n-4
+def bt_iter(g, v, p):
+    s = [(2*v, 0)]; T = 2*n-4; ans = 0
     while s:
         v, d = s.pop()
         if v%2: p.discard(v-1)
         else:
             if v in p: continue
-            if v == T: ans[0] = max(ans[0], d); continue
+            if v == T: ans = max(ans, d); continue
             p.add(v), s.append((v+1, d))
             for w in g[v//2]: s.append((2*w, d+g[v//2][w]))
+    return ans
 
-ans = [0]; bt(F, 1, 0, set()), print('Part 1:', ans[0])
-ans = [0]; bt(G, 1, 0, set()), print('Part 2:', ans[0])
+print('Part 1:', bt_iter(F, 1, set()))
+print('Part 2:', bt(G, 1, set()))
