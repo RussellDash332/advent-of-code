@@ -1,7 +1,7 @@
 import sys, re
 from fractions import Fraction
 data = [[*map(int, re.findall('[-\d]+', l))] for l in sys.stdin]; N = len(data)
-lb, ub, ans = 2e14, 4e14, 0; A = []; b = []
+lb, ub, ans = 2e14, 4e14, 0; A = []
 for i in range(N):
     px1, py1, pz1, vx1, vy1, vz1 = data[i]
     for j in range(i+1, N):
