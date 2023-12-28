@@ -1,5 +1,4 @@
 import sys, re
-from math import *
 from collections import *
 
 g = {}; r = {}
