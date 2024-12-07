@@ -1,1 +1,26 @@
-S=list.__setitem__;r=len(m:=[*map(list,open(X:=0))]);c=len(m[-1]);R=range;[[z:=0,[(T:=m[a])[b]=='^.'[p]and[f:=[*(X:=X or(a,b))],i:=f[0],j:=f[1],S(T,b,'^#'[p]),d:={0},x:=-1,y:=0,l:=0,[(r>i>-1<j<c)*(2-p-l)and[w:=(i,j),[[u:=y,y:=-x,x:=u]for _ in'.'*4if r>i+x>-1<j+y<c!=m[i+x][j+y]<'.'],i:=i+x,j:=j+y,t:=w+(i,j)*p,l:=l|(t in d),d.add(t)]for _ in'.'*r*c],S(T,b,'^.'[p]),z:=z+[len(d)-1,l][p]]for a in R(r)for b in R(c)],print(f'Part {p+1}:',z)]for p in(0,1)]
+m = [[*i] for i in open(0)]; r = len(m); c = len(m[-1])
+
+for i in range(r):
+    for j in range(c):
+        if m[i][j] == '^': sr, sc = X = i, j
+
+d = []; e = []; dr, dc = -1, 0
+while r>sr>-1<sc<c:
+    while r>sr+dr>-1<sc+dc<c and m[sr+dr][sc+dc] == '#': dr, dc = dc, -dr
+    d.append((sr, sc, sr:=sr+dr, sc:=sc+dc))
+print('Part 1:', len({*(s[:2]for s in d)}))
+
+def simulate(sr, sc):
+    d = set(); dr, dc = -1, 0
+    while r>sr>-1<sc<c:
+        while r>sr+dr>-1<sc+dc<c and m[sr+dr][sc+dc] == '#': dr, dc = dc, -dr
+        t = (sr, sc, sr:=sr+dr, sc:=sc+dc)
+        if t in d: return 1
+        d.add(t)
+
+z = set()
+for *_, k, l in d[:-1]:
+    m[k][l] = '#'
+    simulate(*X) and z.add((k, l))
+    m[k][l] = '.'
+print('Part 2:', len(z))
