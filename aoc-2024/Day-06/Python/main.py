@@ -4,11 +4,11 @@ for i in range(r):
     for j in range(c):
         if m[i][j] == '^': sr, sc = X = i, j
 
-d = []; e = []; dr, dc = -1, 0
+d = []; dr, dc = -1, 0
 while r>sr>-1<sc<c:
     while r>sr+dr>-1<sc+dc<c and m[sr+dr][sc+dc] == '#': dr, dc = dc, -dr
     d.append((sr, sc, sr:=sr+dr, sc:=sc+dc))
-print('Part 1:', len({*(s[:2]for s in d)}))
+print('Part 1:', len({s[:2]for s in d}))
 
 def simulate(sr, sc):
     d = set(); dr, dc = -1, 0
