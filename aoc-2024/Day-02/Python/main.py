@@ -1,1 +1,10 @@
-a=[[*map(int,r.split())]for r in open(0)];f=lambda t:sum(any((z:=[*zip(s:=r[:i]+r[i+1:],s[1:])])*(all(0<x-y<4for x,y in z)+all(0<y-x<4for x,y in z))for i in range(len(r)*t,len(r)+1))for r in a);print('Part 1:',f(1),'\nPart 2:',f(0))
+a = b = 0
+for r in open(0):
+    r = [*map(int, r.split())]; k = 0
+    for i in range(len(r)+1):
+        s = r[:i] + r[i+1:]
+        z = [*zip(s, s[1:])]
+        if all(0<x-y<4 for x,y in z) or all(0<y-x<4 for x,y in z): a += i==len(r); k = 1
+    b += k
+print('Part 1:', a)
+print('Part 2:', b)

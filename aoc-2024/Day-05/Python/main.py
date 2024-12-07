@@ -1,1 +1,16 @@
-r=range;m=z=s=0;p={};u=p.get;d={0};[len(l)==1and[m:=1]or m and[k:=len(a:=[*map(int,l.split(','))])//2,e:=a[k],c:=1,[a[i]in u(a[j],d)or[c:=0,t:=a[i],f:=a.__setitem__,f(i,a[j]),f(j,t)]for i in r(len(a))for j in r(i)],z:=z+e*c,s:=s+(1-c)*a[k]]or[a:=[*map(int,l.split('|'))],p.__setitem__(a[0],u(a[0],d)|{a[1]})]for l in open(0)];print('Part 1:',z,'\nPart 2:',s)
+p = q = m = 0; g = {}
+for i in open(0):
+    if len(i) == 1: m = 1
+    elif m:
+        x = [*map(int, i.split(','))]; y = [*x]
+        for i in range(len(x)):
+            for j in range(i):
+                if x[j] in g[x[i]]: x[i], x[j] = x[j], x[i]
+        p += (x==y)*y[len(x)//2]; q += x[len(x)//2]
+    else:
+        a, b = map(int, i.split('|'))
+        if a not in g: g[a] = set()
+        if b not in g: g[b] = set()
+        g[a].add(b)
+print('Part 1:', p)
+print('Part 2:', q-p)
