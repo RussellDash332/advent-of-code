@@ -12,3 +12,5 @@ r=range;m=z=s=0;p={};u=p.get;d={0};[len(l)==1and[m:=1]or m and[k:=len(a:=[*map(i
 S=list.__setitem__;r=len(m:=[*map(list,open(0))]);c=len(m[-1]);X=max(R:=range(r*c),key=lambda x:m[x//c][x%c]);s=lambda p:[d:={(a:=X//c,b:=X%c)},v:=-1,w:=0,l:=0,[~-l*(r>a>-1<b<c)and[[[t:=v,v:=w,w:=-t]for _ in'.'*4if r>a+v>-1<b+w<c!='.'>m[a+v][b+w]],l:=l|((t:=(a,b,a:=a+v,b:=b+w))in d),d.add(t)]for _ in R],[d,l][p]][5];print('Part 1:',len(D:={u[:2]for u in s(0)}),'\nPart 2:',sum([S(m[a],b,'#'),s(1),S(m[a],b,'.')][1]for a,b in D))
 # Day 07: 265
 m=[*open(0)];f=lambda i,c,k,t,p:f(i+1,c+k[i],k,t,p)or f(i+1,c*k[i],k,t,p)or~-p*f(i+1,int(f'{c}{k[i]}'),k,t,p)if i-len(k)else c==t;z=lambda p:print(f'Part {p}:',sum([u:=l.split(':'),t:=int(u[0]),k:=[*map(int,u[1].split())],t*f(1,k[0],k,t,p)][3]for l in m));z(1);z(2)
+# Day 08: 343
+Z=range;R=len(m:=[*open(0)]);C=len(m[-1]);N={};A=set();B=set();[[(x:=m[i][j])>'.'!=N.__setitem__(x,N.get(x,[])+[(i,j)])]for i in Z(R)for j in Z(C)];[[e:=c,f:=d,[[B.add(t:=(e:=e+x,f:=f+y)),k==1!=A.add(t)]for k in Z(R+C)if R>e+x>-1<f+y<C]]for i in N for a,b in N[i]for c,d in N[i]if(x:=a-c)*C+(y:=b-d)];print('Part 1:',len(A),'\nPart 2:',len(B))
