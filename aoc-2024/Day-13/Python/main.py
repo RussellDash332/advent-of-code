@@ -3,5 +3,5 @@ for p in (0, 1):
     Z = 0
     for r in R:
         a, d, b, e, c, f = map(int, r); c += p*10**13; f += p*10**13; x = c*d-a*f; y = b*d-a*e
-        if x%y==0: Z += 3*(c-x//y*b)//a+x//y
+        if x%y==0 and (c-x//y*b)%a==0: Z += 3*(c-x//y*b)//a+x//y
     print(f'Part {p+1}:', Z)
