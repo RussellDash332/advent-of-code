@@ -24,5 +24,5 @@ m=input().split();h={};f=lambda x,d:d<1or h.get(t:=(x,d))or[v:=~-d,p:=10**((k:=l
 Z=range;D='@';R=len(m:=[D+l+D for l in open(0)])+2;C=len(m[-1]);m=[D*C,*m,D*C];V={};X=Y=0;[[Q:=[(i,j)],A:=0,P:=0,E:=0,S:=[],[V.get(q:=r*C+c)or[V.update({q:(A:=A+1)}),[m[r][c]!=m[r+u][c+v]!=[P:=P+1,S:=S+[(k,t,r,c)]]or Q.append((r+u,c+v))for k,(u,v,t)in enumerate(((-1,0,r),(0,-1,c),(0,1,c),(1,0,r)))]]for r,c in Q],[[E:=E+(t[:2]!=S[:2]or abs(t[2]-S[2]+(t[3]-S[3])*1j)>1),S:=t]for t in sorted(S)],X:=X+A*P,Y:=Y+A*E]for i in Z(1,R-1)for j in Z(1,C-1)];print('Part 1:',X,'\nPart 2:',Y)
 # Day 13: 254
 import re;R=[*map(int,re.findall('\d+',open(0).read()))];[print(f'Part {p+1}:',sum([a:=R[i:i+6],b:=a[0],c:=a[4]+(u:=p*10**13),(x:=c*a[1]-b*a[5]-b*u)%(y:=a[2]*a[1]-b*a[3])==(d:=c-x//y*a[2])%b==0and d*3//b+x//y][3]for i in range(0,len(R),6)))for p in(0,1)]
-# Day 14: 310
-import re;M=[*map(int,re.findall('[-\d]+',open(0).read()))];print('Part 2:',max([Z:=[0]*4,[[p:=M[i:i+4],x:=(p[1]+p[3]*T)%103,y:=(p[0]+p[2]*T)%101,Z.__setitem__(b:=(x<51)+2*(y<50),Z[b]+(x!=51!=y+1))]for i in range(0,len(M),4)],T==100!=print('Part 1:',Z[0]*Z[1]*Z[2]*Z[3]),(max(Z),T)][3]for T in range(5**6))[1])
+# Day 14: 306
+import re;M=[*map(int,re.findall('[-\d]+',open(0).read()))];U=[[Z:=[0]*4,[[p:=M[i:i+4],x:=(p[1]+p[3]*T)%103,y:=(p[0]+p[2]*T)%101,Z.__setitem__(b:=(x<51)+2*(y<50),Z[b]+(x!=51!=y+1))]for i in range(0,len(M),4)],(Z[0]*Z[1]*Z[2]*Z[3],T)][2]for T in range(5**6)];print('Part 1:',U[100][0],'\nPart 2:',min(U)[1])
