@@ -34,8 +34,8 @@ from heapq import*;L=9e9;U=range;P=heappush;K=((0,-1),(-1,0),(1,0),(0,1));R=len(
 import re;a,b,c,*p=map(int,re.findall('\d+',open(q:=0).read()));m={0};u=[t:=0]*4;[q<len(p)!=[i:=p[q],j:=p[q+1],x:=(0,1,2,3,a,b,c,0)[j],i<1!=[a:=a>>x]or i<2!=(b:=b^j,u.__setitem__(t,u[t]^j))or i%2<1!=[b:=(x%8,b^c)[i//4]]or i<4!=(q:=(j-2,q)[a<1],t:=t|2*(q<0))or i>6!=(c:=a>>x,t:=t|1)or u.append(str(x%8)),q:=q+2]for _ in'.'*999];print('Part 1:',','.join(u[4:]),'\nPart 2:',min([m:={y for x in m for k in range(8)if[y:=8*x+k,w:=y%8^u[0],(y>>w)%8^w^u[1]==n][2]}for n in p[::-1]][-1]))
 # Day 18: 358
 S=[*open(0)];L=71;m=L*L*[1];d=[[0]+L*L*[-1]for _ in S];F=list.__setitem__;X=S[sum([t:=[*map(int,r.split(','))],F(m,t[1]*L+t[0],0),q:=[(0,0)],[L>r+x>-1<c+y<L>m[(p:=(r+x)*L+c+y)]>0>D[p]!=F(D,p,D[r*L+c]+1)!=q.append((r+x,c+y))for r,c in q for x,y in((0,-1),(-1,0),(0,1),(1,0))],D[-2]>0][4]for r,D in zip(S,d))].strip();print('Part 1:',d[1023][-2],'\nPart 2:',X)
-# Day 19: 226
-P,_,*m=map(str.strip,open(0));P=P.split(', ');h={};f=lambda s:h[s]if s in h else h.setdefault(s,(s in P)+sum(f(s[i:])*(s[:i]in P)for i in range(1,len(s))));print("Part 1:",len(v:=[x for i in m if(x:=f(i))]),"\nPart 2:",sum(v))
+# Day 19: 220
+from functools import*;P,_,*m=map(str.strip,open(0));P=P.split(', ');f=lru_cache(lambda s:(s in P)+sum(f(s[i:])*(s[:i]in P)for i in range(1,len(s))));print("Part 1:",len(v:=[x for i in m if(x:=f(i))]),"\nPart 2:",sum(v))
 # Day 20: 579
 U=range;R=len(m:=[[*x.strip()]for x in open(0)]);C=len(m[0]);N=R*C;K=((0,1),(0,-1),(-1,0),(1,0));S,E=(min(i for i in U(N)if m[i//C][i%C]==c)for c in'SE');A=[-1]*N;B=[*A];A[S]=B[E]=0;[[Q:=[v],[[r:=u//C,c:=u%C,[D[(p:=(r+x)*C+c+y)]<0!=m[r+x][c+y]>'#'!=D.__setitem__(p,D[u]+1)!=Q.append(p)for x,y in K]]for u in Q]]for D,v in((A,S),(B,E))];[[Y:=2+18*p,print(f'Part {p+1}:',sum(sum([d:=Y-abs(a-s),sum(m[s][t]>'#'!=A[E]-A[a*C+b]-B[s*C+t]+d-Y-abs(b-t)>99for t in U(max(b-d,1),min(b+d+1,C)))][1]for s in U(max(a-Y,1),min(a+Y+1,R)))for a in U(R)for b in U(C)if'#'<m[a][b]))]for p in(0,1)]
 # Day 21: 710
