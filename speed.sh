@@ -1,4 +1,4 @@
-export Y=2023
+export Y=2024
 export TIMEFORMAT='Time: %3R seconds'
 cd ~/advent-of-code/aoc-$Y
 for i in $(seq -f '%02g' 1 25)
