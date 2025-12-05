@@ -6,5 +6,5 @@ import re;v=[[*map(int,l.split('-'))]for l in input().split(',')];f=lambda t:sum
 from functools import*;f=cache(lambda x,n:max(f(y:=x//10,n),10*f(y,n-1)+x%10)if x*n else 0);v=[*map(int,open(0))];print('Part 1:',sum(f(x,2)for x in v),'\nPart 2:',sum(f(x,12)for x in v))
 # Day 04: 299
 R=range;r=len(m:=[*map(list,open(0))]);c=len(m[0])-1;P=[0];[[q:=len(M:=[(i,j)for i in R(r)for j in R(c)if'.'<m[i][j]!=sum(r>i+x>-1<j+y<c!=m[i+x][j+y]>'.'for x in R(-1,2)for y in R(-1,2))<5]),[m[i].__setitem__(j,'.')for i,j in M],q and P.append(q)]for p in P];print('Part 1:',P[1],'\nPart 2:',sum(P))
-# Day 05: 330
-S=str.split;h=lambda a,b:a[1]>b[0]<b[1]>a[0]and[min(a[0],b[0]),max(a[1],b[1])];A,B=S(open(0).read(),'\n\n');I=sorted([*map(int,S(i,'-'))]for i in S(A));M=[];[[M.pop(),M.append(k)]if M and(k:=h(M[-1],j))else M.append(j)for j in I];print('Part 1:',sum(any(a<=int(q)<b+1for a,b in M)for q in S(B)),'\nPart 2:',sum(b-a+1for a,b in M))
+# Day 05: 295
+S,M=str.split,[];A,B=S(open(0).read(),'\n\n');[M.append(M and(a:=M[-1])[1]>=j[0]<=j[1]>=a[0]and[M.pop(),min(a[0],j[0]),max(a[1],j[1])][1:]or j)for j in sorted([*map(int,S(i,'-'))]for i in S(A))];print('Part 1:',sum(any(a<=int(q)<b+1for a,b in M)for q in S(B)),'\nPart 2:',sum(b-a+1for a,b in M))

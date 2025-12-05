@@ -1,6 +1,6 @@
 def merge(intervals):
     r = []
-    for j in intervals:
+    for j in sorted(intervals):
         if r and r[-1][1] >= j[0] and j[1] >= r[-1][0]: r[-1] = (min(r[-1][0], j[0]), max(r[-1][1], j[1]))
         else: r.append(j)
     return r
