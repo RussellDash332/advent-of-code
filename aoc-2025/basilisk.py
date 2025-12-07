@@ -10,3 +10,5 @@ R=range;r=len(m:=[*map(list,open(0))]);c=len(m[0])-1;P=[0];[[q:=len(M:=[(i,j)for
 S,M=str.split,[];A,B=S(open(0).read(),'\n\n');[M.append(M and(a:=M[-1])[1]>=j[0]<=j[1]>=a[0]and[M.pop(),min(a[0],j[0]),max(a[1],j[1])][1:]or j)for j in sorted([*map(int,S(i,'-'))]for i in S(A))];print('Part 1:',sum(any(a<=int(q)<b+1for a,b in M)for q in S(B)),'\nPart 2:',sum(b-a+1for a,b in M))
 # Day 06: 226
 *X,P=open(0);P=P.split();A=[*zip(*map(str.split,X))];B=[''.join(x).strip()for x in zip(*X)];print('Part 1:',sum(eval(p.join(x))for x,p in zip(A,P)),'\nPart 2:',sum([eval(p.join(B[:(x:=B.index(''))])),B:=B[x+1:]][0]for p in P))
+# Day 07: 205
+L,*M=open(0);Q={L.index('S'):1};print('Part 1:',sum([[T:={},sum([x:=r[k]>'S',T:=T|{k-x:T.get(k-x,0)+Q[k],k+x:T.get(k+x,0)+Q[k]}][0]for k in Q),Q:=T][1]for i,r in enumerate(M)]),'\nPart 2:',sum(Q.values()))
