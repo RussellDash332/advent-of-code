@@ -1,23 +1,28 @@
-class UFDS:
-    def __init__(self, N):
-        self.p = [*range(N)]; self.rank = [0]*N; self.size = [1]*N; self.n = N
-    def find(self, i):
-        if self.p[i] == i: return i
-        self.p[i] = self.find(self.p[i])
-        return self.p[i]
-    def union(self, i, j):
-        if (x:=self.find(i)) != (y:=self.find(j)):
-            self.n -= 1
-            if self.rank[x] > self.rank[y]: self.p[y] = x; self.size[x] += self.size[y]
-            else: self.p[x] = y; self.rank[y] += self.rank[x] == self.rank[y]; self.size[y] += self.size[x]
+from heapq import *
 from math import *
-P = [[*map(int, l.split(','))] for l in open(0)]
-U = UFDS(N:=len(P))
-E = sorted((hypot(*(a-b for a,b in zip(P[i], P[j]))), i, j) for i in range(N) for j in range(i))
-for k, (_, a, b) in enumerate(E):
-    U.union(a, b)
+import sys
+
+P = [[*map(int, l.split(','))] for l in sys.stdin]
+N = len(P)
+
+Up = [*range(N)]; Urank = [0]*N; Usize = [1]*N; Un = [N]
+def find(i):
+    if Up[i] == i: return i
+    Up[i] = find(Up[i])
+    return Up[i]
+def union(i, j):
+    if (x:=find(i)) != (y:=find(j)):
+        Un[0] -= 1
+        if Urank[x] > Urank[y]: Up[y] = x; Usize[x] += Usize[y]
+        else: Up[x] = y; Urank[y] += Urank[x] == Urank[y]; Usize[y] += Usize[x]
+
+E = [(hypot(P[i][0]-P[j][0], P[i][1]-P[j][1], P[i][2]-P[j][2]), i, j) for i in range(N) for j in range(i)]
+heapify(E)
+k = 0
+while Un[0] > 1:
+    _, a, b = heappop(E); union(a, b)
     if k == 999:
-        print('Part 1:', prod(sorted(U.size[i] for i in {U.find(i) for i in range(N)})[-3:]))
-    if U.n == 1:
-        print('Part 2:', P[a][0]*P[b][0])
-        break
+        *_, p, q, r = sorted(Usize[i] for i in {*map(find, range(N))})
+        print('Part 1:', p*q*r)
+    k += 1
+print('Part 2:', P[a][0]*P[b][0])
