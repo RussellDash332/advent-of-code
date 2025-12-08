@@ -12,5 +12,5 @@ S,M=str.split,[];A,B=S(open(0).read(),'\n\n');[M.append(M and(a:=M[-1])[1]>=j[0]
 *X,P=open(0);P=P.split();A=[*zip(*map(str.split,X))];B=[''.join(x).strip()for x in zip(*X)];print('Part 1:',sum(eval(p.join(x))for x,p in zip(A,P)),'\nPart 2:',sum([eval(p.join(B[:(x:=B.index(''))])),B:=B[x+1:]][0]for p in P))
 # Day 07: 183
 L,*M=open(0);Q={L.index('S'):1};print('Part 1:',sum([[T:={},sum([x:=r[k]>'S',T:=T|{v:T.get(v,0)+Q[k]for v in(k-x,k+x)}][0]for k in Q),Q:=T][1]for r in M]),'\nPart 2:',sum(Q.values()))
-# Day 08: 358
-R=range(len(P:=[[*map(int,l.split(','))]for l in open(0)]));T=z={i:1<<i for i in R};Q=[[U:=T[a]|T[b],T:=T|{u:U for u in R if(1<<u)&U},z:={*T.values()},S:=P[a][0]*P[b][0]][2]for _,a,b in sorted((sum((a-b)**2for a,b in zip(P[i],P[j])),i,j)for i in R for j in range(i))if len(z)>1];*_,a,b,c=sorted(map(int.bit_count,Q[999]));print('Part 1:',a*b*c,'\nPart 2:',S)
+# Day 08: 355
+R=range(len(P:=[[*map(int,l.split(','))]for l in open(0)]));T=z=[1<<i for i in R];Q=[[U:=T[a]|T[b],[T.__setitem__(u,U)for u in R if(1<<u)&U],z:={*T},S:=P[a][0]*P[b][0]][2]for _,a,b in sorted((sum((a-b)**2for a,b in zip(P[i],P[j])),i,j)for i in R for j in range(i))if~-len(z)];*_,a,b,c=sorted(map(int.bit_count,Q[999]));print('Part 1:',a*b*c,'\nPart 2:',S)
