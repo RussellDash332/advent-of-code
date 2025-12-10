@@ -1,4 +1,56 @@
-import z3
+INF = float('inf'); EPS = 1e-9
+def simplex(A, C):
+    def pivot(r, s):
+        k = 1/D[r][s]
+        for i in range(m+2):
+            if i == r: continue
+            for j in range(n+2):
+                if j != s: D[i][j] -= D[r][j]*D[i][s]*k
+        for i in range(n+2): D[r][i] *= k
+        for i in range(m+2): D[i][s] *= -k
+        D[r][s] = k; B[r], N[s] = N[s], B[r]
+    def find(p):
+        while True:
+            if D[m+p][s:=min((i for i in range(n+1) if p or N[i] != -1), key=lambda x: (D[m+p][x], N[x]))] > -EPS: return 1
+            if (r:=min((i for i in range(m) if D[i][s] > EPS), key=lambda x: (D[x][-1]/D[x][s], B[x]), default=-1)) == -1: return 0
+            pivot(r, s)
+    m = len(A); n = len(A[0])-1; N = [*range(n), -1]; B = [*range(n, n+m)]; D = [*([*A[i], -1] for i in range(m)), C+[0]*2, [0]*(n+2)]
+    for i in range(m): D[i][-2], D[i][-1] = D[i][-1], D[i][-2]
+    D[-1][n] = 1; r = min(range(m), key=lambda x: D[x][-1])
+    if D[r][-1] < -EPS and (pivot(r, n) or not find(1) or D[-1][-1] < -EPS):
+        return -INF, None
+    for i in range(m): B[i] == -1 and pivot(i, min(range(n), key=lambda x: (D[i][x], N[x])))
+    if find(0):
+        x = [0]*n
+        for i in range(m):
+            if 0 <= B[i] < n: x[B[i]] = D[i][-1]
+        return sum(C[i]*x[i] for i in range(n)), x
+    else:
+        return -INF, None
+
+def f(A):
+    n = len(A[0])-1
+    bval = float('inf')
+    bsol = None
+    def branch(A):
+        nonlocal bval, bsol
+
+        val, x = simplex(A, [1]*n)
+        if val+EPS >= bval or val == -INF:
+            return
+
+        k, v = next(((i, int(e)) for i,e in enumerate(x) if abs(e-round(e))>EPS), (-1, 0))
+        if k == -1:
+            if val+EPS < bval:
+                bval, bsol = val, [*map(round, x)]
+        else:
+            s = [0]*n+[v]; s[k] = 1
+            branch(A+[s])
+            s = [0]*n+[~v]; s[k] = -1
+            branch(A+[s])
+    branch(A)
+    return round(bval)
+
 p1 = p2 = 0
 for l in open(0):
     m, *p, c = l.split()
@@ -6,6 +58,7 @@ for l in open(0):
     q = [*map(lambda x: eval(x[:-1]+',)'), p)]
     c = [*map(int, c[1:-1].split(','))]
 
+    # Part 1: bitmask BFS
     B = [-1]*(1<<n); B[0] = 0    
     p = [*map(lambda x: sum(1<<i for i in x), q)]
     m = int(m[-2:0:-1].replace('#', '1').replace('.', '0'), 2)
@@ -16,15 +69,14 @@ for l in open(0):
             B[u^v] = B[u]+1; Q.append(u^v)
     p1 += B[m]
 
-    S = [z3.Int(f'x{i}') for i in range(len(p))]
-    s = z3.Optimize()
-    G = [[] for _ in range(n)]
+    # Part 2: branch-and-bound ILP
+    A = [[0]*-~len(p) for _ in range(2*n+len(p))]
     for i in range(len(q)):
-        s.add(S[i] >= 0)
-        for e in q[i]: G[e].append(i)
+        A[~i][i] = -1
+        for e in q[i]:
+            A[e][i] = 1; A[e+n][i] = -1
     for i in range(n):
-        s.add(sum(S[k] for k in G[i]) == c[i])
-    s.minimize(sum(S)); s.check()
-    p2 += int(str(s.model().eval(sum(S))))
+        A[i][-1] = c[i]; A[i+n][-1] = -c[i]
+    p2 += f(A)
 print('Part 1:', p1)
 print('Part 2:', p2)
